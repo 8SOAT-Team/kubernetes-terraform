@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fast-dep
+  labels:
+    app: fast-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fast-crud
+  template:
+    metadata:
+      labels:
+        app: fast-crud
+    spec:
+      containers:
+      - name: fast-order-cont
+        image: bergzado/fast-order-app:0.0.5
+        env:
+        - name: ConnectionStrings__DefaultConnectionContainer
+          value: "Server=mssql-service,1433;Database=FastOrderDB;User Id=sa;Password=tech#2024;Encrypt=false;TrustServerCertificate=true;MultipleActiveResultSets=true;"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        ports:
+        - containerPort: 57399
+        - containerPort: 57398
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 10
+          failureThreshold: 3
+          initialDelaySeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 10
+          failureThreshold: 5
+          initialDelaySeconds: 3
+        resources:
+            requests:
+              cpu: 1m
