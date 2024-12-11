@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: fast-crud
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 80
       name: http
