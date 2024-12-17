@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: fo-api-configmap
 data:
-  CONNECTIONSTRINGS_DEFAULTCONNECTIONCONTAINER: "Server=mssql-service,1433;Database=FastOrderDB;User Id=sa;Password=tech#2024;Encrypt=false;TrustServerCertificate=true;MultipleActiveResultSets=true;"
+  CONNECTIONSTRINGS_DEFAULTCONNECTIONCONTAINER: "Server=rds-fastorderdb-tf.c2twjn0qgflq.us-east-1.rds.amazonaws.com,1433;Database=FastOrderDB;User Id=sa;Password=tech#2024;Encrypt=false;TrustServerCertificate=true;MultipleActiveResultSets=true;"
   ASPNETCORE_ENVIRONMENT: Production
-  DISTRIBUTED_CACHE_URL: "fo-cache-svc:6380"
+  DISTRIBUTED_CACHE_URL: "soat-cache-lrzdcy.serverless.use1.cache.amazonaws.com:6379"
+  RUN_MIGRATIONS_ON_START: "true"

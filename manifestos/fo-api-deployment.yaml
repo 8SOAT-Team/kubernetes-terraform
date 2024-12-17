@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: fast-order-cont
-        image: bergzado/fast-order-app:0.0.7
+        image: bergzado/fast-order-app:0.0.8
         ports:
         - containerPort: 57399
         - containerPort: 57398
