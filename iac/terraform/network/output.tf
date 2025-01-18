@@ -3,6 +3,11 @@ output "vpc_id" {
   value       = aws_vpc.cluster_vpc.id
 }
 
+output "vpc_cidr_block" {
+  description = "ID da VPC criada"
+  value       = aws_vpc.cluster_vpc.cidr_block
+}
+
 output "public_subnet_ids" {
   description = "IDs das subnets públicas"
   value       = [
