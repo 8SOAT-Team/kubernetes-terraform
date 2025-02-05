@@ -8,7 +8,6 @@ resource "aws_security_group" "allow_tls" {
   }
 }
 
-# Permite conexões ao RDS SQL Server de qualquer lugar (ingress)
 resource "aws_security_group_rule" "sql_server_sg" {
   type              = "ingress"
   from_port         = 1433
@@ -18,7 +17,6 @@ resource "aws_security_group_rule" "sql_server_sg" {
   security_group_id = aws_security_group.allow_tls.id
 }
 
-# Permite tráfego de saída irrestrito (egress)
 resource "aws_security_group_rule" "sql_server_sg_outbound" {
   type              = "egress"
   from_port         = 0
@@ -28,7 +26,6 @@ resource "aws_security_group_rule" "sql_server_sg_outbound" {
   security_group_id = aws_security_group.allow_tls.id
 }
 
-# Permite tráfego HTTP ao backend
 resource "aws_security_group_rule" "allow_http" {
   type              = "ingress"
   from_port         = 80
@@ -38,7 +35,15 @@ resource "aws_security_group_rule" "allow_http" {
   security_group_id = aws_security_group.allow_tls.id
 }
 
-# Permite tráfego HTTPS ao backend
+resource "aws_security_group_rule" "allow_http_81" {
+  type              = "ingress"
+  from_port         = 81
+  to_port           = 81
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.allow_tls.id
+}
+
 resource "aws_security_group_rule" "allow_https" {
   type              = "ingress"
   from_port         = 443
@@ -48,7 +53,6 @@ resource "aws_security_group_rule" "allow_https" {
   security_group_id = aws_security_group.allow_tls.id
 }
 
-# Permite tráfego interno entre recursos na VPC (EKS e RDS)
 resource "aws_security_group_rule" "allow_internal_communication" {
   type              = "ingress"
   from_port         = 0
@@ -58,11 +62,28 @@ resource "aws_security_group_rule" "allow_internal_communication" {
   security_group_id = aws_security_group.allow_tls.id
 }
 
-# Permite tráfego HTTP ao backend na porta 8080
 resource "aws_security_group_rule" "allow_http_8080" {
   type              = "ingress"
   from_port         = 8080
   to_port           = 8080
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.allow_tls.id
+}
+
+resource "aws_security_group_rule" "allow_app_port_57398" {
+  type              = "ingress"
+  from_port         = 57398
+  to_port           = 57398
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.allow_tls.id
+}
+
+resource "aws_security_group_rule" "allow_app_port_57399" {
+  type              = "ingress"
+  from_port         = 57399
+  to_port           = 57399
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.allow_tls.id
