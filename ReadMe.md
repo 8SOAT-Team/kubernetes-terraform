@@ -22,7 +22,7 @@ Este repositório contém uma estrutura de arquivos `hcl` para o provisionamento
 - Para executar o Apply ou Destroy em sua infraestrutura basta selcionar o workspace `Terraform Apply/Destroy`em seguida clique em `run workflow`. Selecione ação *(apply ou destroy)*, por último escolha o módulo desejado.
 - As Actions utilizam um backend remoto da Hascorp para guardar o arquivo do State, para isso caso seja necessário gerenciar a infraestrutura por uma outra conta de AWS é necessário alterar dentro do Workflow criado no Terraform Cloud as vériaveis de ambiente *(AWS_ACCESS_KEY_ID e AWS_SECRET_ACCESS_KEY)* além do `HASHICORP_TOKEN` que será gerado em sua respectiva conta.
 
-- Para que tudo integrar este backend com o terraform preciso declar esta estrutura no arquivo `providers.tf`:
+- Para integrar todo este backend com o terraform preciso declar esta estrutura no arquivo `providers.tf`:
 
 ```hcl
   backend "remote" {
@@ -33,11 +33,11 @@ Este repositório contém uma estrutura de arquivos `hcl` para o provisionamento
       name = "seu-workspace"
     }
   }
-}
 ```
-- hostname = Sempre vai ser `app.terraform.io`
-- organization = Aqui declaramos a organizarion em que estão inseridos os workspaces, caso necessário troque este valor para o sua organization criada posteriormente.
-- workspaces = Aqui declaramos o nome do workspace, caso necessário troque este valor para o seu workspace criado posteriormente.
+
+- *hostname* = Sempre vai ser `app.terraform.io`
+- *organization* = Aqui declaramos a organizarion em que estão inseridos os workspaces, caso necessário troque este valor para o sua organization criada posteriormente.
+- *workspaces* = Aqui declaramos o nome do workspace, caso necessário troque este valor para o seu workspace criado posteriormente.
 
 
 ## Como Provisionar Recursos ##
