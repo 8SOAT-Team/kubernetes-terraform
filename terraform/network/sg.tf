@@ -46,17 +46,8 @@ resource "aws_security_group_rule" "allow_http_81" {
 
 resource "aws_security_group_rule" "allow_http_5118" {
   type              = "ingress"
-  from_port         = 5118
-  to_port           = 5118
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.allow_tls.id
-}
-
-resource "aws_security_group_rule" "allow_http_7163" {
-  type              = "ingress"
-  from_port         = 7163
-  to_port           = 7163
+  from_port         = 5000
+  to_port           = 5000
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.allow_tls.id
